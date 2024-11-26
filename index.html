@@ -9,7 +9,7 @@
 <body>
     <nav class="navbar">
         <div class="navbar-container">
-            <a href="idex.html" class="logo">FUT Builder</a>
+            <a href="index.html" class="logo">FUT Builder</a>
             <div class="search-bar">
                 <input type="text" placeholder="Rechercher un joueur..." aria-label="Search">
                 <button type="button" class="search-btn">🔍</button>
@@ -20,21 +20,30 @@
             </div>
         </div>
     </nav>
-    <!--<div class="main-container">
+    <div class="main-container">
         
         <div class="terrain-container">
             <div class="terrain">
-                
+                <img src="https://www.futbin.com/design2/img/static/field-bg.svg" alt="Terrain" class="terrain-image">
+                <div class="players-container" id="players-container">
+                    
+                </div>
             </div>
         </div>
-
         
         <div class="form-container">
+            <label for="formation">Formation</label>
+            <select id="formation">
+                <option value="4-3-3">4-3-3</option>
+                <option value="4-4-2">4-4-2</option>
+            </select>
+        
             <h2>Ajouter un Joueur</h2>
+        
             <form id="player-form">
                 <label for="name">Nom du joueur</label>
                 <input type="text" id="name" placeholder="Ex : Lionel Messi" required>
-                
+        
                 <label for="position">Position</label>
                 <select id="position" required>
                     <option value="GK">Gardien (GK)</option>
@@ -48,23 +57,13 @@
                     <option value="LM">Milieu gauche (LM)</option>
                     <option value="RM">Milieu droit (RM)</option>
                 </select>
-                
-                <label for="rating">Note</label>
-                <input type="number" id="rating" placeholder="Ex : 93" min="1" max="99" required>
-
-                <label for="formation">Formation</label>
-                <select id="formation">
-                    <option value="4-3-3">4-3-3</option>
-                    <option value="4-4-2">4-4-2</option>
-                </select>
-
                 <button type="submit">Ajouter le joueur</button>
             </form>
         </div>
-    </div>-->
-    <section class="background-photo">
         
-    </section>
+    </div>
+    
+    <script src="js/script.js"></script>
 
 </body>
 </html>
