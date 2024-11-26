@@ -78,5 +78,55 @@ body {
 .signup-btn:hover {
     background-color: #27ae60;
 }
+/* end nav-bar */
+/* Conteneur principal */
+.main-container {
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    padding: 1rem;
+    gap: 2rem;
+}
+
+/* Terrain */
+.terrain-container {
+    flex: 1;
+    position: relative;
+    max-width: 600px;
+    aspect-ratio: 3 / 4; /* Maintient les proportions du terrain */
+}
+
+.terrain {
+    width: 100%;
+    height: 100%;
+    background-image: url('https://www.futbin.com/design2/img/static/field-bg.svg');
+    background-size: cover;
+    background-position: center;
+    border-radius: 10px;
+    position: relative;
+}
+
+/* Positions des joueurs */
+.player-position {
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    background-color: rgba(52, 152, 219, 0.8);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1rem;
+    font-weight: bold;
+    transform: translate(-50%, -50%);
+    cursor: pointer;
+    transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+.player-position:hover {
+    transform: translate(-50%, -50%) scale(1.1);
+    background-color: rgba(41, 128, 185, 1);
+}
 
 
