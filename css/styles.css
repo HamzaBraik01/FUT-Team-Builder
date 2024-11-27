@@ -143,7 +143,53 @@ form button:hover {
     background-color: #2980b9;
 }
 /*------------------------------------------------------------------------*/
+.terrain-container {
+    position: relative;
+    width: 500px;
+    height: 700px;
+}
 
+.terrain {
+    position: relative;
+    width: 100%;
+}
+.player-badge {
+    position: absolute;
+    width: 80px;
+    height: 90px;
+    background-color: #2e2e2e;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+}
+
+.player-badge:hover {
+    transform: scale(1.1);
+}
+
+.player-badge span {
+    font-size: 12px;
+    text-align: center;
+}
+.players-container button{
+    cursor: pointer;
+}
+
+.gk { top: 82%; left: 47%; }
+.cb1 { top: 65%; left: 32%; }
+.cb2 { top: 65%; left: 62%; }
+.lb { top: 65%; left: 10%; }
+.rb { top: 65%; left: 80%; }
+.cm1 { top: 40%; left: 20%; }
+.cm2 { top: 40%; left: 75%; }
+.cm-holding { top: 45%; left: 45%; }
+.cam1 { top: 18%; left: 20%; }
+.cam2 { top: 18%; left: 75%; }
+.st { top: 13%; left: 45%; }
 
 
 
