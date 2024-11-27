@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Terrain de Football</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #1a1a1a;
+            color: #fff;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .terrain-container {
+            position: relative;
+            width: 500px;
+            height: 700px;
+        }
+
+        .terrain {
+            position: relative;
+            width: 100%;
+            height: 100%;
+        }
+
+        .terrain-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .player-badge {
+            position: absolute;
+            width: 60px;
+            height: 80px;
+            background-color: #2e2e2e;
+            border-radius: 8px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            transition: transform 0.2s ease;
+        }
+
+        .player-badge:hover {
+            transform: scale(1.1);
+        }
+
+        .player-badge span {
+            font-size: 12px;
+            text-align: center;
+        }
+
+        /* Positions */
+        .gk { top: 85%; left: 42%; }
+        .cb1 { top: 70%; left: 30%; }
+        .cb2 { top: 70%; left: 55%; }
+        .lb { top: 60%; left: 10%; }
+        .rb { top: 60%; left: 75%; }
+        .cm1 { top: 45%; left: 20%; }
+        .cm2 { top: 45%; left: 60%; }
+        .cm-holding { top: 50%; left: 40%; }
+        .cam1 { top: 30%; left: 20%; }
+        .cam2 { top: 30%; left: 60%; }
+        .st { top: 15%; left: 40%; }
+    </style>
+</head>
+<body>
+    <div class="terrain-container">
+        <div class="terrain">
+            <img src="https://www.futbin.com/design2/img/static/field-bg.svg" alt="Terrain" class="terrain-image">
+
+            <!-- Player Positions -->
+            <div class="player-badge gk">
+                <span>Goalkeeper</span>
+                <button>+</button>
+            </div>
+            <div class="player-badge cb1">
+                <span>Defender</span>
+                <button>+</button>
+            </div>
+            <div class="player-badge cb2">
+                <span>Defender</span>
+                <button>+</button>
+            </div>
+            <div class="player-badge lb">
+                <span>Fullback</span>
+                <button>+</button>
+            </div>
+            <div class="player-badge rb">
+                <span>Fullback</span>
+                <button>+</button>
+            </div>
+            <div class="player-badge cm1">
+                <span>Box-to-Box</span>
+                <button>+</button>
+            </div>
+            <div class="player-badge cm2">
+                <span>Playmaker</span>
+                <button>+</button>
+            </div>
+            <div class="player-badge cm-holding">
+                <span>Holding</span>
+                <button>+</button>
+            </div>
+            <div class="player-badge cam1">
+                <span>Half-Winger</span>
+                <button>+</button>
+            </div>
+            <div class="player-badge cam2">
+                <span>Half-Winger</span>
+                <button>+</button>
+            </div>
+            <div class="player-badge st">
+                <span>Advanced Forward</span>
+                <button>+</button>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
