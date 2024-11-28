@@ -86,12 +86,85 @@
                 <span class="select-icon">⬇️</span>
             </div>
             <div class="add-player-container">
-                <button id="add-player-btn" class="add-player-btn">Ajouter un joueur</button>
+                <button id="addPlayerBtn" class="add-player-btn">Ajouter un joueur</button>
             </div>
         </div>
     </div>
-    <div class="all-players">
+    <!-- modal-->
+    <!-- modal-->
+<!-- modal -->
+<div class="modal" id="modal">
+    <div class="modal-content">
+        <span class="close" id="closeModal">&times;</span>
+        <h3>Ajouter un joueur</h3>
+        <form id="playerForm">
+            <div class="form-group">
+                <div style="flex: 1; margin-right: 10px;">
+                    <label for="name">Nom :</label>
+                    <input type="text" id="name" name="name" placeholder="Entrez le nom" required>
+                </div>
+                <div style="flex: 1;">
+                    <label for="photo">Photo (URL) :</label>
+                    <input type="url" id="photo" name="photo" placeholder="Entrez l'URL de la photo" required>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div style="flex: 1; margin-right: 10px;">
+                    <label for="nationality">Nationalité :</label>
+                    <input type="text" id="nationality" name="nationality" placeholder="Entrez la nationalité" required>
+                </div>
+                <div style="flex: 1;">
+                    <label for="position">Position :</label>
+                    <select id="position" name="position" required>
+                        <option value="GK">Gardien (GK)</option>
+                        <option value="CB">Défenseur central (CB)</option>
+                        <option value="LB">Latéral gauche (LB)</option>
+                        <option value="RB">Latéral droit (RB)</option>
+                        <option value="CM">Milieu central (CM)</option>
+                        <option value="LW">Ailier gauche (LW)</option>
+                        <option value="RW">Ailier droit (RW)</option>
+                        <option value="ST">Attaquant (ST)</option>
+                        <option value="LM">Milieu gauche (LM)</option>
+                        <option value="RM">Milieu droit (RM)</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div style="flex: 1; margin-right: 10px;">
+                    <label for="club">Club :</label>
+                    <input type="text" id="club" name="club" placeholder="Entrez le nom du club" required>
+                </div>
+                <div style="flex: 1;">
+                    <label for="logo">Logo du club (URL) :</label>
+                    <input type="url" id="logo" name="logo" placeholder="Entrez l'URL du logo du club" required>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div style="flex: 1; margin-right: 10px;">
+                    <label for="rating">Note générale :</label>
+                    <input type="number" id="rating" name="rating" placeholder="Entrez la note générale" required>
+                </div>
+            </div>
+
+            <div id="dynamicFields">
+                <!-- Les champs spécifiques à la position seront ajoutés ici -->
+            </div>
+
+            <button type="submit">Ajouter le joueur</button>
+        </form>
     </div>
+</div>
+
+
+    
+
+    
+    
+    
+    
     <script src="js/script.js"></script>
 </body>
 </html>
