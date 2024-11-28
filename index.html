@@ -74,34 +74,23 @@
                 
             </div>
         </div>
-        <div class="form-container">
-            <label for="formation">Formation</label>
-            <select id="formation">
-                <option value="4-3-3">4-3-3</option>
-            </select>
-        
-            <h2>Ajouter un Joueur</h2>
-        
-            <form id="player-form">
-                <label for="name">Nom du joueur</label>
-                <input type="text" id="name" placeholder="Ex : Lionel Messi" required>
-        
-                <label for="position">Position</label>
-                <select id="position" required>
-                    <option value="GK">Gardien (GK)</option>
-                    <option value="CB">Défenseur central (CB)</option>
-                    <option value="LB">Latéral gauche (LB)</option>
-                    <option value="RB">Latéral droit (RB)</option>
-                    <option value="CM">Milieu central (CM)</option>
-                    <option value="LW">Ailier gauche (LW)</option>
-                    <option value="RW">Ailier droit (RW)</option>
-                    <option value="ST">Attaquant (ST)</option>
-                    <option value="LM">Milieu gauche (LM)</option>
-                    <option value="RM">Milieu droit (RM)</option>
+        <div class="formation-container">
+            <label for="formation" class="formation-label">Choisissez une formation :</label>
+            <div class="custom-select">
+                <select id="formation" class="formation-select">
+                    <option value="4-3-3">4-3-3</option>
+                    <!--<option value="4-4-2">4-4-2</option>
+                    <option value="3-5-2">3-5-2</option>
+                    <option value="5-3-2">5-3-2</option>-->
                 </select>
-                <button type="submit">Ajouter le joueur</button>
-            </form>
+                <span class="select-icon">⬇️</span>
+            </div>
+            <div class="add-player-container">
+                <button id="add-player-btn" class="add-player-btn">Ajouter un joueur</button>
+            </div>
         </div>
+    </div>
+    <div class="all-players">
     </div>
     <script src="js/script.js"></script>
 </body>

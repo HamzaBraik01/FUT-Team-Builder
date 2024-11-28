@@ -191,6 +191,157 @@ form button:hover {
 .cam2 { top: 18%; left: 75%; }
 .st { top: 13%; left: 45%; }
 
+/*-------------------------------------------------------*/
+.formation-container {
+    margin-bottom: 2rem;
+}
+
+.formation-label {
+    font-size: 1rem;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+    display: block;
+    color: #2c3e50;
+}
+
+.custom-select {
+    position: relative;
+    display: inline-block;
+    width: 100%;
+    max-width: 300px;
+    margin-top: 0.5rem;
+}
+
+.formation-select {
+    appearance: none;
+    width: 100%;
+    padding: 0.8rem;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: white;
+    color: #2c3e50;
+    cursor: pointer;
+}
+
+.formation-select:focus {
+    outline: none;
+    border-color: #3498db;
+    box-shadow: 0 0 5px rgba(52, 152, 219, 0.5);
+}
+
+.select-icon {
+    position: absolute;
+    top: 50%;
+    right: 1rem;
+    transform: translateY(-50%);
+    pointer-events: none;
+    color: #7f8c8d;
+}
+
+.custom-select:hover .formation-select {
+    border-color: #2980b9;
+}
+
+.custom-select:hover .select-icon {
+    color: #2980b9;
+}
+/*-------------------------------------------------*/
+
+.all-players {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    padding: 20px;
+  }
+  
+  .category-container {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+  }
+  
+  .category-title {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 20px;
+    text-align: center;
+  }
+  
+  .player-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 20px;
+  }
+  
+  .player-badge-gold {
+    position: relative;
+    text-align: center;
+  }
+  
+  .badge {
+    position: relative;
+    width: 150px;
+    height: 200px;
+  }
+  
+  .badge-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+  }
+  
+  .player-info {
+    position: relative;
+    z-index: 1;
+  }
+  
+  .player-photo {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    margin-bottom: 10px;
+  }
+  
+  .player-name {
+    font-size: 1rem;
+    font-weight: bold;
+  }
+  
+  .player-position {
+    font-size: 0.9rem;
+    color: gray;
+  }
+  
+.club-logo {
+    width: 20px;
+    height: 20px;
+    vertical-align: middle;
+}
+/*----------------------------------------------------------------------------*/
+.add-player-container {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.add-player-btn {
+    background-color: #4CAF50; 
+    color: white; 
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+
+.add-player-btn:hover {
+    background-color: #45a049; 
+}
 
 
 
