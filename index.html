@@ -88,6 +88,7 @@
             <div class="add-player-container">
                 <button id="addPlayerBtn" class="add-player-btn">Ajouter un joueur</button>
             </div>
+            
         </div>
     </div>
 <!-- modal -->
@@ -112,10 +113,17 @@
                     <label for="nationality">Nationalité :</label>
                     <input type="text" id="nationality" name="nationality" placeholder="Entrez la nationalité">
                 </div>
-                <div style="flex: 1;">
+                <div style="flex: 1; margin-left: 10px;">
+                    <label for="flag">Drapeau (URL) :</label>
+                    <input type="url" id="flag" name="flag" placeholder="Entrez l'URL du drapeau">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div style="flex: 1; margin-right: 10px;">
                     <label for="position">Position :</label>
-                    <select id="position" name="position" >
-                        <option value="">position</option>
+                    <select id="position" name="position">
+                        <option value="">Position</option>
                         <option value="GK">Gardien (GK)</option>
                         <option value="CB">Défenseur central (CB)</option>
                         <option value="LB">Latéral gauche (LB)</option>
@@ -129,6 +137,7 @@
                     </select>
                 </div>
             </div>
+
             <div class="form-group">
                 <div style="flex: 1; margin-right: 10px;">
                     <label for="club">Club :</label>
@@ -151,6 +160,20 @@
         </form>
     </div>
 </div>
+
+
+<!-- Conteneur pour les cartes -->
+ <div class="Conteneur-card">
+    
+ </div>
+
+
+
+
+
+
+
+
 
     <script src="js/script.js"></script>
 </body>
