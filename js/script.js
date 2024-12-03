@@ -149,9 +149,9 @@ const storedPlayers = localStorage.getItem('players');
 
 /*----------------------------------------------------------------------*/
 const conteneurCard = document.querySelector('.Conteneur-card');
-// Function to display player cards inside the .Conteneur-card container
+
 function afficherCartesJoueurs() {
-    conteneurCard.innerHTML = ''; // Clear the container before rendering new cards
+    conteneurCard.innerHTML = ''; 
 
     // Retrieve players from localStorage
     const joueurs = JSON.parse(localStorage.getItem('players')) || [];
@@ -191,8 +191,8 @@ function afficherCartesJoueurs() {
                         <span class="rating">${joueur.rating}</span>
                     </div>
                     <div class="flags">
-                        <img src="${joueur.logo}" alt="$">
-                        <img src="${joueur.club}" alt="">
+                        <img src="${joueur.logo}" alt="${joueur.club}">
+                        <img src="${joueur.club}" alt="${joueur.nationality}">
                     </div>
                 </div>
             </div>
