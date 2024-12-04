@@ -13,6 +13,9 @@ let players = [];
 let playerId = 1; 
 let selectedCard ;
 let playerIdCounter = 0;
+const nameRegex = /^[a-zA-Z\s]+$/; 
+const urlRegex =  /^https:\/\//;
+const numberRangeRegex = /^(0|[1-9][0-9]?)$/;
 const editPlayerForm = document.getElementById('editPlayerForm');
 document.getElementById('menuToggle').addEventListener('click', () => {
     const mobileMenu = document.getElementById('mobileMenu');
@@ -213,6 +216,7 @@ editPosition.addEventListener('change', () => {
 
 playerForm.addEventListener('submit', (event) => {
     event.preventDefault();
+    
     const selectedPosition = positionSelect.value;
     const playerName = document.getElementById('name').value; 
     const playerPhoto = document.getElementById('photo').value; 
@@ -221,6 +225,29 @@ playerForm.addEventListener('submit', (event) => {
     const playerClub = document.getElementById('club').value; 
     const playerLogo = document.getElementById('logo').value; 
     const playerRating = document.getElementById('rating').value; 
+
+    
+    if (!validateInput(playerName, nameRegex)) {
+        alert("Le nom doit contenir uniquement des lettres et espaces.");
+        return;
+    }
+    if (!validateInput(playerPhoto, urlRegex)) {
+        alert("La photo doit être une URL commençant par 'https://'.");
+        return;
+    }
+    if (!validateInput(playerFlag, urlRegex)) {
+        alert("Le drapeau doit être une URL commençant par 'https://'.");
+        return;
+    }
+    if (!validateInput(playerLogo, urlRegex)) {
+        alert("Le logo du club doit être une URL commençant par 'https://'.");
+        return;
+    }
+    if (!validateInput(playerRating, numberRangeRegex)) {
+        alert("La note doit être un nombre entre 0 et 99.");
+        return;
+    }
+
     let newPlayer = {
         id: playerId++, 
         name: playerName,
@@ -232,23 +259,61 @@ playerForm.addEventListener('submit', (event) => {
         logo: playerLogo,
         rating: playerRating,
     };
+
+    
     if (selectedPosition === 'GK') {
-        newPlayer.diving = document.getElementById('diving').value;
-        newPlayer.handling = document.getElementById('handling').value;
-        newPlayer.kicking = document.getElementById('kicking').value;
-        newPlayer.reflexes = document.getElementById('reflexes').value;
-        newPlayer.speed = document.getElementById('speed').value;
-        newPlayer.positioning = document.getElementById('positioning').value;
+        const diving = document.getElementById('diving').value;
+        const handling = document.getElementById('handling').value;
+        const kicking = document.getElementById('kicking').value;
+        const reflexes = document.getElementById('reflexes').value;
+        const speed = document.getElementById('speed').value;
+        const positioning = document.getElementById('positioning').value;
+
+        if (
+            ![diving, handling, kicking, reflexes, speed, positioning].every((value) =>
+                validateInput(value, numberRangeRegex)
+            )
+        ) {
+            alert("Les attributs du gardien doivent être entre 0 et 99.");
+            return;
+        }
+
+        newPlayer.diving = diving;
+        newPlayer.handling = handling;
+        newPlayer.kicking = kicking;
+        newPlayer.reflexes = reflexes;
+        newPlayer.speed = speed;
+        newPlayer.positioning = positioning;
     } else {
-        newPlayer.pace = document.getElementById('pace').value;
-        newPlayer.shooting = document.getElementById('shooting').value;
-        newPlayer.passing = document.getElementById('passing').value;
-        newPlayer.dribbling = document.getElementById('dribbling').value;
-        newPlayer.defending = document.getElementById('defending').value;
-        newPlayer.physical = document.getElementById('physical').value;
+        const pace = document.getElementById('pace').value;
+        const shooting = document.getElementById('shooting').value;
+        const passing = document.getElementById('passing').value;
+        const dribbling = document.getElementById('dribbling').value;
+        const defending = document.getElementById('defending').value;
+        const physical = document.getElementById('physical').value;
+
+        if (
+            ![pace, shooting, passing, dribbling, defending, physical].every((value) =>
+                validateInput(value, numberRangeRegex)
+            )
+        ) {
+            alert("Les attributs du joueur doivent être entre 0 et 99.");
+            return;
+        }
+
+        newPlayer.pace = pace;
+        newPlayer.shooting = shooting;
+        newPlayer.passing = passing;
+        newPlayer.dribbling = dribbling;
+        newPlayer.defending = defending;
+        newPlayer.physical = physical;
     }
+
+    
     players.push(newPlayer); 
     console.log(players); 
+
+    
     createPlayerCard(newPlayer);
     playerForm.reset(); 
     modal.style.display = 'none'; 
@@ -263,10 +328,10 @@ function createPlayerCard(player) {
         'bg-gradient-to-r', 'from-sky-500', 'to-indigo-500', 
         'rounded-lg', 'shadow-lg', 'overflow-hidden', 
         'p-3', 'flex', 'flex-col', 'items-center', 'group', 
-        'w-36', // Set fixed width for smaller screens
-        'sm:w-40', 'md:w-48', 'lg:w-56', // Adjust for larger viewports
+        'w-36', 
+        'sm:w-40', 'md:w-48', 'lg:w-56', 
         'hover:shadow-xl', 'transition-transform', 'duration-300', 
-        'transform', 'hover:-translate-y-1', 'm-3' // Reduced margin
+        'transform', 'hover:-translate-y-1', 'm-3' 
     );
     playerCard.id = playerId;
 
@@ -327,55 +392,54 @@ function createPlayerCard(player) {
     
         if (playerBadge) {
             playerBadge.innerHTML = `
-                <div class="relative bg-gradient-to-r from-sky-500 to-indigo-500 rounded-lg shadow-md overflow-hidden p-2 w-full h-full flex flex-col items-center">
-                    <!-- Close Button -->
-                    <button class="absolute top-1 right-1 bg-red-600 text-white rounded-full w-5 h-5 flex items-center justify-center opacity-0 hover:opacity-100 transition-opacity duration-200 remove-player">
-                        &times;
-                    </button>
-                    <!-- Header: Position and Rating -->
-                    <div class="flex justify-between w-full text-xs">
-                        <span class="font-bold text-stone-50">${player.position}</span>
-                        <span class="font-bold text-yellow-400">${player.rating}</span>
-                    </div>
-    
-                    <!-- Player Photo -->
-                    <img src="${player.photo}" alt="${player.name}" class="w-12 h-12 rounded-full border border-gray-300 my-2">
-    
-                    <!-- Player Name -->
-                    <h2 class="text-xs font-semibold text-center text-gray-900">${player.name}</h2>
-    
-                    <!-- Flag and Club Logo -->
-                    <div class="flex items-center my-1">
-                        <img src="${player.flag}" alt="Flag" class="w-4 h-3 mr-1">
-                        <img src="${player.logo}" alt="Club" class="w-6 h-6">
-                    </div>
-    
-                    <!-- Stats -->
-                    ${
-                        player.position === 'GK'
-                        ? `
-                        <div class="grid grid-cols-2 gap-1 mt-2 text-[10px]">
-                            <div class="font-medium text-gray-700">DIV: <span class="font-bold text-stone-50">${player.diving}</span></div>
-                            <div class="font-medium text-gray-700">HAN: <span class="font-bold text-stone-50">${player.handling}</span></div>
-                            <div class="font-medium text-gray-700">KIC: <span class="font-bold text-stone-50">${player.kicking}</span></div>
-                            <div class="font-medium text-gray-700">REF: <span class="font-bold text-stone-50">${player.reflexes}</span></div>
-                            <div class="font-medium text-gray-700">SPE: <span class="font-bold text-stone-50">${player.speed}</span></div>
-                            <div class="font-medium text-gray-700">POS: <span class="font-bold text-stone-50">${player.positioning}</span></div>
-                        </div>
-                        `
-                        : `
-                        <div class="grid grid-cols-2 gap-1 mt-2 text-[10px]">
-                            <div class="font-medium text-gray-700">PAC: <span class="font-bold text-stone-50">${player.pace}</span></div>
-                            <div class="font-medium text-gray-700">SHO: <span class="font-bold text-stone-50">${player.shooting}</span></div>
-                            <div class="font-medium text-gray-700">PAS: <span class="font-bold text-stone-50">${player.passing}</span></div>
-                            <div class="font-medium text-gray-700">DRI: <span class="font-bold text-stone-50">${player.dribbling}</span></div>
-                            <div class="font-medium text-gray-700">DEF: <span class="font-bold text-stone-50">${player.defending}</span></div>
-                            <div class="font-medium text-gray-700">PHY: <span class="font-bold text-stone-50">${player.physical}</span></div>
-                        </div>
-                        `
-                    }
+            <div class="relative bg-gradient-to-r from-sky-500 to-indigo-500 rounded-lg shadow-md overflow-hidden p-1 w-full h-full flex flex-col items-center">
+                <!-- Close Button -->
+                <button class="absolute top-1 right-1 bg-red-600 text-white rounded-full w-4 h-4 flex items-center justify-center opacity-0 hover:opacity-100 transition-opacity duration-200 remove-player">
+                    &times;
+                </button>
+                <!-- Header: Position and Rating -->
+                <div class="flex justify-between w-full text-xs sm:text-sm">
+                    <span class="font-bold text-stone-50">${player.position}</span>
+                    <span class="font-bold text-yellow-400">${player.rating}</span>
                 </div>
-            `;
+
+                <!-- Player Photo -->
+                <img src="${player.photo}" alt="${player.name}" class="w-10 h-10 sm:w-12 sm:h-12 rounded-full border border-gray-300 my-1">
+
+                <!-- Player Name -->
+                <h2 class="text-xs sm:text-sm font-semibold text-center text-gray-900">${player.name}</h2>
+
+                <!-- Flag and Club Logo -->
+                <div class="flex items-center my-1">
+                    <img src="${player.flag}" alt="Flag" class="w-4 h-3 mr-1">
+                    <img src="${player.logo}" alt="Club" class="w-5 h-5">
+                </div>
+
+                <!-- Stats -->
+                ${
+                    player.position === 'GK'
+                    ? `
+                    <div class="grid grid-cols-2 gap-1 mt-1 text-[9px] sm:text-xs">
+                        <div class="font-medium text-gray-700">DIV: <span class="font-bold text-stone-50">${player.diving}</span></div>
+                        <div class="font-medium text-gray-700">HAN: <span class="font-bold text-stone-50">${player.handling}</span></div>
+                        <div class="font-medium text-gray-700">KIC: <span class="font-bold text-stone-50">${player.kicking}</span></div>
+                        <div class="font-medium text-gray-700">REF: <span class="font-bold text-stone-50">${player.reflexes}</span></div>
+                        <div class="font-medium text-gray-700">SPE: <span class="font-bold text-stone-50">${player.speed}</span></div>
+                        <div class="font-medium text-gray-700">POS: <span class="font-bold text-stone-50">${player.positioning}</span></div>
+                    </div>
+                    `
+                    : `
+                    <div class="grid grid-cols-2 gap-1 mt-1 text-[9px] sm:text-xs">
+                        <div class="font-medium text-gray-700">PAC: <span class="font-bold text-stone-50">${player.pace}</span></div>
+                        <div class="font-medium text-gray-700">SHO: <span class="font-bold text-stone-50">${player.shooting}</span></div>
+                        <div class="font-medium text-gray-700">PAS: <span class="font-bold text-stone-50">${player.passing}</span></div>
+                        <div class="font-medium text-gray-700">DRI: <span class="font-bold text-stone-50">${player.dribbling}</span></div>
+                        <div class="font-medium text-gray-700">DEF: <span class="font-bold text-stone-50">${player.defending}</span></div>
+                        <div class="font-medium text-gray-700">PHY: <span class="font-bold text-stone-50">${player.physical}</span></div>
+                    </div>
+                    `
+                }
+            </div>`;
             const badgeContainer = playerBadge.querySelector('.relative');
             badgeContainer.addEventListener('mouseover', () => {
                 const removeButton = badgeContainer.querySelector('.remove-player');
@@ -452,7 +516,7 @@ function showEditModal(player, playerCard, playerIndex) {
     const playerLogo = document.getElementById('editLogo').value; 
     const playerRating = document.getElementById('editRating').value; 
     let updatedPlayer = {
-        id: player.id, // Keep the same ID
+        id: player.id, 
         name: playerName,
         photo: playerPhoto,
         position: selectedPosition,
@@ -539,7 +603,7 @@ function generatePlayerCardHTML(player) {
 }
 
 
-// Make sure this is placed after your existing JavaScript code
+
 
 // Selecting all player buttons
 const playerButtons = document.querySelectorAll('.player-button');
@@ -561,14 +625,53 @@ function showPlayersByPosition(position) {
 
     selectedPlayers.forEach(player => {
         const playerItem = document.createElement('li');
-        playerItem.className = 'flex items-center justify-between mb-2';
+        playerItem.className = 'flex flex-wrap gap-4 ';
         playerItem.innerHTML = `
-            <div class="flex items-center">
-                <img src="${player.photo}" alt="${player.name}" class="w-8 h-8 rounded-full mr-2">
-                <span class="font-semibold">${player.name}</span>
+            <div class="relative bg-gradient-to-r from-sky-500 to-indigo-500 rounded-lg shadow-md overflow-hidden p-1 w-full h-full flex flex-col items-center">
+                <!-- Header: Position and Rating -->
+                <div class="flex justify-between w-full text-xs sm:text-sm">
+                    <span class="font-bold text-stone-50">${player.position}</span>
+                    <span class="font-bold text-yellow-400">${player.rating}</span>
+                </div>
+
+                <!-- Player Photo -->
+                <img src="${player.photo}" alt="${player.name}" class="w-10 h-10 sm:w-12 sm:h-12 rounded-full border border-gray-300 my-1">
+
+                <!-- Player Name -->
+                <h2 class="text-xs sm:text-sm font-semibold text-center text-gray-900">${player.name}</h2>
+
+                <!-- Flag and Club Logo -->
+                <div class="flex items-center my-1">
+                    <img src="${player.flag}" alt="Flag" class="w-4 h-3 mr-1">
+                    <img src="${player.logo}" alt="Club" class="w-5 h-5">
+                </div>
+
+                <!-- Stats -->
+                ${
+                    player.position === 'GK'
+                    ? `
+                    <div class="grid grid-cols-2 gap-1 mt-1 text-[9px] sm:text-xs">
+                        <div class="font-medium text-gray-700">DIV: <span class="font-bold text-stone-50">${player.diving}</span></div>
+                        <div class="font-medium text-gray-700">HAN: <span class="font-bold text-stone-50">${player.handling}</span></div>
+                        <div class="font-medium text-gray-700">KIC: <span class="font-bold text-stone-50">${player.kicking}</span></div>
+                        <div class="font-medium text-gray-700">REF: <span class="font-bold text-stone-50">${player.reflexes}</span></div>
+                        <div class="font-medium text-gray-700">SPE: <span class="font-bold text-stone-50">${player.speed}</span></div>
+                        <div class="font-medium text-gray-700">POS: <span class="font-bold text-stone-50">${player.positioning}</span></div>
+                    </div>
+                    `
+                    : `
+                    <div class="grid grid-cols-2 gap-1 mt-1 text-[9px] sm:text-xs">
+                        <div class="font-medium text-gray-700">PAC: <span class="font-bold text-stone-50">${player.pace}</span></div>
+                        <div class="font-medium text-gray-700">SHO: <span class="font-bold text-stone-50">${player.shooting}</span></div>
+                        <div class="font-medium text-gray-700">PAS: <span class="font-bold text-stone-50">${player.passing}</span></div>
+                        <div class="font-medium text-gray-700">DRI: <span class="font-bold text-stone-50">${player.dribbling}</span></div>
+                        <div class="font-medium text-gray-700">DEF: <span class="font-bold text-stone-50">${player.defending}</span></div>
+                        <div class="font-medium text-gray-700">PHY: <span class="font-bold text-stone-50">${player.physical}</span></div>
+                    </div>
+                    `
+                }
             </div>
-            <span class="font-medium">${player.rating}</span>
-        `;
+                    `;
         playerList.appendChild(playerItem);
     });
 
@@ -580,3 +683,7 @@ function showPlayersByPosition(position) {
 document.getElementById('closeChoixPlayer').addEventListener('click', () => {
     document.getElementById('modalChoixPlayer').classList.add('hidden');
 });
+
+function validateInput(input, regex) {
+    return regex.test(input);
+}
