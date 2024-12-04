@@ -12,7 +12,7 @@ const dynamicFieldsEdit = document.getElementById('dynamicFieldsEdit');
 let players = []; 
 let playerId = 1; 
 let selectedCard ;
-let playerIdCounter = 1;
+let playerIdCounter = 0;
 const editPlayerForm = document.getElementById('editPlayerForm');
 document.getElementById('menuToggle').addEventListener('click', () => {
     const mobileMenu = document.getElementById('mobileMenu');
@@ -258,63 +258,67 @@ const container = document.querySelector('.Conteneur-card');
 function createPlayerCard(player) {
     const playerId = `player-${playerIdCounter++}`;
     const playerCard = document.createElement('div');
-    playerCard.classList.add('relative', 'bg-gradient-to-r' , 'from-sky-500' , 'to-indigo-500', 
-        'rounded-lg', 'shadow-lg', 'overflow-hidden', 'p-4', 
-        'flex', 'flex-col', 'items-center', 'group', 'w-60', 
-        'hover:shadow-xl', 'transition-transform', 'duration-300', 'transform', 
-        'hover:-translate-y-2', 'm-4');
+    playerCard.classList.add(
+        'relative', 
+        'bg-gradient-to-r', 'from-sky-500', 'to-indigo-500', 
+        'rounded-lg', 'shadow-lg', 'overflow-hidden', 
+        'p-3', 'flex', 'flex-col', 'items-center', 'group', 
+        'w-36', // Set fixed width for smaller screens
+        'sm:w-40', 'md:w-48', 'lg:w-56', // Adjust for larger viewports
+        'hover:shadow-xl', 'transition-transform', 'duration-300', 
+        'transform', 'hover:-translate-y-1', 'm-3' // Reduced margin
+    );
     playerCard.id = playerId;
+
     playerCard.innerHTML = `
         <div class="flex justify-between w-full">
-            <span class="text-lg font-bold text-stone-50">${player.position}</span>
-            <span class="text-lg font-bold text-yellow-500">${player.rating}</span>
+            <span class="text-xs sm:text-sm md:text-base font-bold text-stone-50">${player.position}</span>
+            <span class="text-xs sm:text-sm md:text-base font-bold text-yellow-500">${player.rating}</span>
         </div>
-        <img src="${player.photo}" alt="${player.name}" class="w-26 h-26 rounded-full border-2 border-gray-300 my-4">
-        <h2 class="text-xl font-semibold text-center text-gray-900">${player.name}</h2>
-        <div class="flex items-center my-2">
-            <img src="${player.flag}" alt="Flag" class="w-6 h-4 mr-2">
-            <img src="${player.logo}" alt="Club" class="w-8 h-8">
+        <img 
+            src="${player.photo}" 
+            alt="${player.name}" 
+            class="w-12 h-12 sm:w-16 sm:h-16 md:w-20 md:h-20 lg:w-24 lg:h-24 rounded-full border-2 border-gray-300 my-3" 
+        >
+        <h2 class="text-xs sm:text-sm md:text-lg font-semibold text-center text-gray-900">${player.name}</h2>
+        <div class="flex items-center my-1">
+            <img src="${player.flag}" alt="Flag" class="w-4 h-3 sm:w-5 sm:h-4 mr-1">
+            <img src="${player.logo}" alt="Club" class="w-5 h-5 sm:w-6 sm:h-6">
         </div>
-        ${
-            player.position === 'GK'
-            ? `
-            <div class="grid grid-cols-2 gap-2 mt-4">
-                <div class="text-sm font-medium text-gray-700">DIV: <span class="font-bold text-stone-50">${player.diving}</span></div>
-                <div class="text-sm font-medium text-gray-700">HAN: <span class="font-bold text-stone-50">${player.handling}</span></div>
-                <div class="text-sm font-medium text-gray-700">KIC: <span class="font-bold text-stone-50">${player.kicking}</span></div>
-                <div class="text-sm font-medium text-gray-700">REF: <span class="font-bold text-stone-50">${player.reflexes}</span></div>
-                <div class="text-sm font-medium text-gray-700">SPE: <span class="font-bold text-stone-50">${player.speed}</span></div>
-                <div class="text-sm font-medium text-gray-700">POS: <span class="font-bold text-stone-50">${player.positioning}</span></div>
-            </div>
-            `
-            : `
-            <div class="grid grid-cols-2 gap-2 mt-4">
-                <div class="text-sm font-medium text-gray-700">PAC: <span class="font-bold text-stone-50">${player.pace}</span></div>
-                <div class="text-sm font-medium text-gray-700">SHO: <span class="font-bold text-stone-50">${player.shooting}</span></div>
-                <div class="text-sm font-medium text-gray-700">PAS: <span class="font-bold text-stone-50">${player.passing}</span></div>
-                <div class="text-sm font-medium text-gray-700">DRI: <span class="font-bold text-stone-50">${player.dribbling}</span></div>
-                <div class="text-sm font-medium text-gray-700">DEF: <span class="font-bold text-stone-50">${player.defending}</span></div>
-                <div class="text-sm font-medium text-gray-700">PHY: <span class="font-bold text-stone-50">${player.physical}</span></div>
-            </div>
-            `
-        }
-        <div class="absolute bottom-0 left-0 right-0 flex justify-center space-x-2 p-2 group-hover:bg-gray-800 transition duration-300">
+        <div class="grid grid-cols-2 gap-1 mt-2 text-[10px]">
+            ${player.position === 'GK' ? `
+                <div class="font-medium text-gray-700">DIV: <span class="font-bold text-stone-50">${player.diving}</span></div>
+                <div class="font-medium text-gray-700">HAN: <span class="font-bold text-stone-50">${player.handling}</span></div>
+                <div class="font-medium text-gray-700">KIC: <span class="font-bold text-stone-50">${player.kicking}</span></div>
+                <div class="font-medium text-gray-700">REF: <span class="font-bold text-stone-50">${player.reflexes}</span></div>
+                <div class="font-medium text-gray-700">SPE: <span class="font-bold text-stone-50">${player.speed}</span></div>
+                <div class="font-medium text-gray-700">POS: <span class="font-bold text-stone-50">${player.positioning}</span></div>
+            ` : `
+                <div class="font-medium text-gray-700">PAC: <span class="font-bold text-stone-50">${player.pace}</span></div>
+                <div class="font-medium text-gray-700">SHO: <span class="font-bold text-stone-50">${player.shooting}</span></div>
+                <div class="font-medium text-gray-700">PAS: <span class="font-bold text-stone-50">${player.passing}</span></div>
+                <div class="font-medium text-gray-700">DRI: <span class="font-bold text-stone-50">${player.dribbling}</span></div>
+                <div class="font-medium text-gray-700">DEF: <span class="font-bold text-stone-50">${player.defending}</span></div>
+                <div class="font-medium text-gray-700">PHY: <span class="font-bold text-stone-50">${player.physical}</span></div>
+            `}
+        </div>
+        <div class="absolute bottom-0 left-0 right-0 flex justify-center space-x-2 p-1 group-hover:bg-gray-800 transition duration-300">
             <button 
-                class="bg-green-500 text-white text-lg font-semibold py-2 px-4 rounded-lg shadow-md opacity-0 group-hover:opacity-100 transition-opacity duration-200 add-player"
+                class="bg-green-500 text-white text-xs md:text-sm font-semibold py-1 px-1 md:py-2 md:px-3 rounded-lg shadow-md opacity-0 group-hover:opacity-100 transition-opacity duration-200 add-player"
             >
                 + Ajouter
             </button>
             <button 
-                class="bg-blue-500 text-white text-sm font-semibold py-2 px-4 rounded-lg shadow-md opacity-0 group-hover:opacity-100 transition-opacity duration-200 edit-player"
+                class="bg-blue-500 text-white text-xs md:text-sm font-semibold py-1 px-1 md:py-2 md:px-3 rounded-lg shadow-md opacity-0 group-hover:opacity-100 transition-opacity duration-200 edit-player" 
+                
             >
                 Modifier
             </button>
         </div>
-
     `;
-    const editbutton =playerCard.querySelector('.edit-player');
+    const editbutton = playerCard.querySelector('.edit-player');
     editbutton.addEventListener('click', () => {
-        showEditModal(player);
+        showEditModal(player, playerCard, playerId);
     });
     const addButton = playerCard.querySelector('.add-player');
     addButton.addEventListener('click', () => {
@@ -404,7 +408,7 @@ function createPlayerCard(player) {
     container.appendChild(playerCard); 
 }
 
-function showEditModal(player) {
+function showEditModal(player, playerCard, playerIndex) {
     editModal.style.display = 'block';
     document.getElementById('editName').value = player.name;
     document.getElementById('editPhoto').value = player.photo;
@@ -434,6 +438,145 @@ function showEditModal(player) {
         document.getElementById('physicalE').value = player.physical;
         
     }
+    let donebtn = editModal.querySelector('#editButton');
+    donebtn.addEventListener('click',function(event){
+            event.preventDefault();
+
+
+    const selectedPosition = editPositionElement.value; 
+    const playerName = document.getElementById('editName').value; 
+    const playerPhoto = document.getElementById('editPhoto').value; 
+    const playerNationality = document.getElementById('editNationality').value; 
+    const playerFlag = document.getElementById('editFlag').value; 
+    const playerClub = document.getElementById('editClub').value; 
+    const playerLogo = document.getElementById('editLogo').value; 
+    const playerRating = document.getElementById('editRating').value; 
+    let updatedPlayer = {
+        id: player.id, // Keep the same ID
+        name: playerName,
+        photo: playerPhoto,
+        position: selectedPosition,
+        nationality: playerNationality,
+        flag: playerFlag,
+        club: playerClub,
+        logo: playerLogo,
+        rating: playerRating,
+    };
+
+    // Add the stats based on position
+    if (selectedPosition === 'GK') {
+        updatedPlayer.diving = document.getElementById('divingE').value;
+        updatedPlayer.handling = document.getElementById('handlingE').value;
+        updatedPlayer.kicking = document.getElementById('kickingE').value;
+        updatedPlayer.reflexes = document.getElementById('reflexesE').value;
+        updatedPlayer.speed = document.getElementById('speedE').value;
+        updatedPlayer.positioning = document.getElementById('positioningE').value;
+    } else {
+        updatedPlayer.pace = document.getElementById('paceE').value;
+        updatedPlayer.shooting = document.getElementById('shootingE').value;
+        updatedPlayer.passing = document.getElementById('passingE').value;
+        updatedPlayer.dribbling = document.getElementById('dribblingE').value;
+        updatedPlayer.defending = document.getElementById('defendingE').value;
+        updatedPlayer.physical = document.getElementById('physicalE').value;
+    }
+    players[playerIndex - 1] = updatedPlayer; 
+    players = players.map(p => p.id === playerId ? updatedPlayer : p);
+    console.log(players); 
+    playerCard.innerHTML = generatePlayerCardHTML(updatedPlayer)
+    editModal.style.display = 'none'; 
+
+
+    })
+}
+
+function generatePlayerCardHTML(player) {
+    return `
+        <div class="flex justify-between w-full">
+            <span class="text-xs sm:text-sm md:text-base font-bold text-stone-50">${player.position}</span>
+            <span class="text-xs sm:text-sm md:text-base font-bold text-yellow-500">${player.rating}</span>
+        </div>
+        <img 
+            src="${player.photo}" 
+            alt="${player.name}" 
+            class="w-12 h-12 sm:w-16 sm:h-16 md:w-20 md:h-20 lg:w-24 lg:h-24 rounded-full border-2 border-gray-300 my-3" 
+        >
+        <h2 class="text-xs sm:text-sm md:text-lg font-semibold text-center text-gray-900">${player.name}</h2>
+        <div class="flex items-center my-1">
+            <img src="${player.flag}" alt="Flag" class="w-4 h-3 sm:w-5 sm:h-4 mr-1">
+            <img src="${player.logo}" alt="Club" class="w-5 h-5 sm:w-6 sm:h-6">
+        </div>
+        <div class="grid grid-cols-2 gap-1 mt-2 text-[10px]">
+            ${player.position === 'GK' ? `
+                <div class="font-medium text-gray-700">DIV: <span class="font-bold text-stone-50">${player.diving}</span></div>
+                <div class="font-medium text-gray-700">HAN: <span class="font-bold text-stone-50">${player.handling}</span></div>
+                <div class="font-medium text-gray-700">KIC: <span class="font-bold text-stone-50">${player.kicking}</span></div>
+                <div class="font-medium text-gray-700">REF: <span class="font-bold text-stone-50">${player.reflexes}</span></div>
+                <div class="font-medium text-gray-700">SPE: <span class="font-bold text-stone-50">${player.speed}</span></div>
+                <div class="font-medium text-gray-700">POS: <span class="font-bold text-stone-50">${player.positioning}</span></div>
+            ` : `
+                <div class="font-medium text-gray-700">PAC: <span class="font-bold text-stone-50">${player.pace}</span></div>
+                <div class="font-medium text-gray-700">SHO: <span class="font-bold text-stone-50">${player.shooting}</span></div>
+                <div class="font-medium text-gray-700">PAS: <span class="font-bold text-stone-50">${player.passing}</span></div>
+                <div class="font-medium text-gray-700">DRI: <span class="font-bold text-stone-50">${player.dribbling}</span></div>
+                <div class="font-medium text-gray-700">DEF: <span class="font-bold text-stone-50">${player.defending}</span></div>
+                <div class="font-medium text-gray-700">PHY: <span class="font-bold text-stone-50">${player.physical}</span></div>
+            `}
+        </div>
+        <div class="absolute bottom-0 left-0 right-0 flex justify-center space-x-2 p-1 group-hover:bg-gray-800 transition duration-300">
+            <button 
+                class="bg-green-500 text-white text-xs md:text-sm font-semibold py-1 px-1 md:py-2 md:px-3 rounded-lg shadow-md opacity-0 group-hover:opacity-100 transition-opacity duration-200 add-player"
+            >
+                + Ajouter
+            </button>
+            <button 
+                class="bg-blue-500 text-white text-xs md:text-sm font-semibold py-1 px-1 md:py-2 md:px-3 rounded-lg shadow-md opacity-0 group-hover:opacity-100 transition-opacity duration-200 edit-player" 
+                
+            >
+                Modifier
+            </button>
+        </div>
+    `;
 }
 
 
+// Make sure this is placed after your existing JavaScript code
+
+// Selecting all player buttons
+const playerButtons = document.querySelectorAll('.player-button');
+const playerBadgeElements = document.querySelectorAll('.player-badge');
+
+playerButtons.forEach((button, index) => {
+    button.addEventListener('click', () => {
+        const positionClassName = playerBadgeElements[index].classList[1]; 
+        showPlayersByPosition(positionClassName);
+    });
+});
+
+
+function showPlayersByPosition(position) {
+    const selectedPlayers = players.filter(player => player.position === position);
+    
+    const playerList = document.getElementById('ulChoixPlayers');
+    playerList.innerHTML = ''; 
+
+    selectedPlayers.forEach(player => {
+        const playerItem = document.createElement('li');
+        playerItem.className = 'flex items-center justify-between mb-2';
+        playerItem.innerHTML = `
+            <div class="flex items-center">
+                <img src="${player.photo}" alt="${player.name}" class="w-8 h-8 rounded-full mr-2">
+                <span class="font-semibold">${player.name}</span>
+            </div>
+            <span class="font-medium">${player.rating}</span>
+        `;
+        playerList.appendChild(playerItem);
+    });
+
+    // Display the modal
+    document.getElementById('modalChoixPlayer').classList.remove('hidden');
+}
+
+// Closing functionality for the modal
+document.getElementById('closeChoixPlayer').addEventListener('click', () => {
+    document.getElementById('modalChoixPlayer').classList.add('hidden');
+});
